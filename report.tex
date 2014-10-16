@@ -30,27 +30,29 @@
 
 \begin{abstract}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et nulla non dui mattis tincidunt. Vestibulum mattis volutpat tristique. Quisque sollicitudin ac eros et vulputate. Curabitur a libero ut diam cursus lobortis. Sed imperdiet, mauris a iaculis sodales, neque nisi consectetur libero, et vulputate lacus elit et nunc. Nunc at.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et nulla non dui mattis tincidunt. Vestibulum mattis volutpat tristique. Quisque sollicitudin ac eros et vulputate. Curabitur a libero ut diam cursus lobortis. Sed imperdiet, mauris a iaculis sodales, neque nisi consectetur libero, et vulputate lacus elit et nunc. CA's are cool.
 
 \end{abstract}
 
 \section{Introduction}
 
+\subsection{Cellular Automata}
+
 \begin{itemize}
     \item What is a Cellular Automata?
-    \item A little about FPGA and SBlocks.
-    \item Motivation
+    \item Turing-complete CA with 29 states \cite{neumann1966selfreplication}.
+    \item Codd: Turing-complete CA with 8 states, given some conditions \cite{codd1968cellular}
+    \item Langton's research on emergent computation and phase transition \cite{langton1990edgeofchaos}.
+    \item Wolfram's four qualitative CA classes \cite{wolfram1984complexity}?
 \end{itemize}
 
-\section{Related Work}
+\section{Related Work / Motivation}
+
+\subsection{Self-Replication}
 
 \begin{itemize}
     \item von Neumann's work on self-replication from around 1950 \cite{neumann1966selfreplication}.
     \item Self-replicating structures \cite{reggia1998neumann}
-    \item Turing-complete CA with 29 states
-    \item Codd: Turing-complete CA with 8 states, given some conditions \cite{codd1968cellular}
-    \item Langton's research on emergent computation and phase transition \cite{langton1990edgeofchaos}.
-    \item Wolfram's four qualitative CA classes \cite{wolfram1984complexity}?
     \item Replicating universal computers with 63 states and 8500 rules \cite{perrier1996toward}.
 \end{itemize}
 
@@ -62,6 +64,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et nulla non
 \end{itemize}
 
 \subsection{Artificial Development \cite{harding2008artificial}\cite{tufte2008evodevo}}
+
 \begin{itemize}
     \item Zygote
     \item Scalability
@@ -73,9 +76,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum et nulla non
 
 \subsection{Conception: Djupdal \cite{djupdal2003sblock}}
 
-Fig. \ref{fig:ca-djupdal}
+\begin{itemize}
+    \item Original hardware
+    \item Sblock
+    \item Fig. \ref{fig:ca-djupdal}
+\end{itemize}
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=0.5\textwidth]{figures/ca-djupdal}
     \caption{Original design by Djupdal (Reprinted from \cite{stovneng2014sblock})}
@@ -84,9 +91,11 @@ Fig. \ref{fig:ca-djupdal}
 
 \subsection{Extension: Aamodt \cite{aamodt2005sblock}}
 
-Fig. \ref{fig:ca-aamodt}
+\begin{itemize}
+    \item Fig. \ref{fig:ca-aamodt}
+\end{itemize}
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=0.5\textwidth]{figures/ca-aamodt}
     \caption{Additions by Aamodt (Reprinted from \cite{stovneng2014sblock})}
@@ -95,9 +104,12 @@ Fig. \ref{fig:ca-aamodt}
 
 \subsection{Renovation: Støvneng \cite{stovneng2014sblock}}
 
-Fig. \ref{fig:ca-stovneng}
+\begin{itemize}
+    \item New hardware
+    \item Fig. \ref{fig:ca-stovneng}
+\end{itemize}
 
-\begin{figure}[h!]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=0.5\textwidth]{figures/ca-stovneng}
     \caption{Parts optimized by Støvneng (Reprinted from \cite{stovneng2014sblock})}
