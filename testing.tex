@@ -5,12 +5,14 @@
     \item Development running infinitely (comparison of parameterized signal with constant)
     \item WriteRule-3D not following spec (up/down swapped with north/south)
     \item PrintTypes (wrong offsets)
+    \item ReadVector/PrintVector still 32-bit
 \end{itemize}
 
 \subsection{Bugs remaining}
 
 \begin{itemize}
-    \item GetStates does not work (buffering errors)
+    \item ReadStates prints extra zeroes at beginning (buffering error)
+    \item ReadRuleVector prints least significant bits one extra time (buffering error?)
     \item Development stores previous state/type to bram
 \end{itemize}
 
