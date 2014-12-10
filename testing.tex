@@ -12,8 +12,9 @@
 
 \begin{itemize}
     \item ReadStates prints extra zeroes at beginning (buffering error)
-    \item ReadRuleVector prints least significant bits one extra time (buffering error?)
-    \item Development stores previous state/type to bram
+    \item ReadRuleVector sends an extra word the first time, every word thereafter is offset by one
+    \item ReadUsedRules does not work when width = 8 (simulator crashes: ERROR: Index 63 out of bound 31 downto 0)
+    \item Development stores previous state/type to bram. Rules does not get triggered
 \end{itemize}
 
 \subsection{Instructions (3D)}
@@ -35,5 +36,6 @@
     \item devstep
     \item readStates
     \item readRuleVector
+    \item readUsedRules
 \end{itemize}
 
