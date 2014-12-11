@@ -14,7 +14,8 @@
     \item ReadStates prints extra zeroes at beginning (buffering error)
     \item ReadRuleVector sends an extra word the first time, every word thereafter is offset by one
     \item ReadUsedRules does not work when width = 8 (simulator crashes: ERROR: Index 63 out of bound 31 downto 0)
-    \item Development stores previous state/type to bram. Rules does not get triggered
+    \item Development stores previous state/type to bram. Rules does not get triggered. Are they written?
+    \item Config does not store states to sblocks properly. Signal fluctuates.
 \end{itemize}
 
 \subsection{Instructions (3D)}
@@ -33,9 +34,38 @@
 \subsubsection{Not working}
 
 \begin{itemize}
-    \item devstep
-    \item readStates
+    \item config
     \item readRuleVector
+    \item readStates
     \item readUsedRules
+    \item writeStates
+    \item writeTypes
+\end{itemize}
+
+\subsubsection{Unknown}
+
+\begin{itemize}
+    \item devstep
+    \item doFitness
+    \item readback
+    \item readFitness
+    \item readSums
+    \item run
+    \item startDFT
+    \item writeLUTConv
+    \item writeRule
+\end{itemize}
+
+\subsubsection{Not tested}
+
+\begin{itemize}
+    \item break
+    \item end
+    \item jump
+    \item jumpEqual
+    \item nop
+    \item resetDevCounter
+    \item setNumberOfLastRule
+    \item store
 \end{itemize}
 
