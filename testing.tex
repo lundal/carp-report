@@ -11,7 +11,8 @@
 \subsection{Bugs remaining}
 
 \begin{itemize}
-    \item ReadStates prints extra zeroes at beginning (buffering error)
+    \item ReadStates prints garbage in top 32 bits (but they are discarded by api)
+    \item WriteStates writes two rows, then on the next layer, and only uses least significant 32 bits. Intended behavior? (sim only)
     \item ReadRuleVector sends an extra word the first time, every word thereafter is offset by one
     \item ReadUsedRules does not work when width = 8 (simulator crashes: ERROR: Index 63 out of bound 31 downto 0)
     \item Development stores previous state/type to bram. Rules does not get triggered. Are they written?
@@ -25,7 +26,9 @@
 \begin{itemize}
     \item clearBRAM
     \item readState
+    \item readStates
     \item readType
+    \item readTypes
     \item switch
     \item writeState
     \item writeType
@@ -36,7 +39,6 @@
 \begin{itemize}
     \item config
     \item readRuleVector
-    \item readStates
     \item readUsedRules
     \item writeStates
     \item writeTypes
