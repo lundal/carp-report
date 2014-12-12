@@ -19,50 +19,46 @@
     \item Config does not store states to sblocks properly. Signal fluctuates.
 \end{itemize}
 
-\subsection{Instructions (3D)}
+\subsection{Instructions}
 
-\subsubsection{Working}
-
-\begin{itemize}
-    \item break
-    \item clearBRAM
-    \item end
-    \item jump
-    \item jumpEqual
-    \item nop
-    \item readState
-    \item readStates
-    \item readType
-    \item readTypes
-    \item resetDevCounter
-    \item store
-    \item switch
-    \item writeState
-    \item writeType
-\end{itemize}
-
-\subsubsection{Not working}
-
-\begin{itemize}
-    \item config
-    \item readRuleVector
-    \item readUsedRules
-    \item writeStates
-    \item writeTypes
-\end{itemize}
-
-\subsubsection{Unknown}
-
-\begin{itemize}
-    \item devstep
-    \item doFitness
-    \item readback
-    \item readFitness
-    \item readSums
-    \item run
-    \item setNumberOfLastRule
-    \item startDFT
-    \item writeLUTConv
-    \item writeRule
-\end{itemize}
+\begin{table}[!ht]
+    \renewcommand{\arraystretch}{1.3}
+    \caption{Instruction status}
+    \label{tab:instructions}
+    \centering
+    \begin{tabular}{l|l|l}
+        \bfseries Instruction & \bfseries 2D & \bfseries 3D \\
+        \hline
+        break & Yes & Yes \\
+        clearBRAM & Yes & ? \\
+        config & Yes & Undecidable \\
+        devstep & Undecidable & Undecidable \\
+        doFitness & Undecidable & Undecidable \\
+        end & Yes & Yes \\
+        jump & Yes & Yes \\
+        jumpEqual & Yes & Yes \\
+        nop & Yes & Yes \\
+        readback & Yes & Undecidable \\
+        readFitness & Undecidable & Undecidable \\
+        readRuleVector & No & No \\
+        readState & Yes & Yes \\
+        readStates & Yes & Yes \\
+        readSums & Undecidable & Undecidable \\
+        readType & Yes & Yes \\
+        readTypes & Yes & Yes \\
+        readUsedRules & Undecidable & ? \\
+        resetDevCounter & Yes & Yes \\
+        run & Undecidable & Undecidable \\
+        setNumberOfLastRule & Undecidable & Undecidable \\
+        startDFT & Undecidable & Undecidable \\
+        store & Yes & Yes \\
+        switch & Yes & Yes \\
+        writeLUTConv & Undecidable & Undecidable \\
+        writeRule & Undecidable & Undecidable \\
+        writeState & Yes & Yes \\
+        writeStates & Yes & No \\
+        writeType & Yes & Yes \\
+        writeTypes & Yes & No \\
+    \end{tabular}
+\end{table}
 
