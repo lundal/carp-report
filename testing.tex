@@ -14,7 +14,7 @@
     \item ReadStates prints garbage in top 32 bits (but they are discarded by api)
     \item WriteStates writes two rows, then on the next layer, and only uses least significant 32 bits. Intended behavior? (sim only)
     \item ReadRuleVector sends an extra word the first time, every word thereafter is offset by one
-    \item ReadUsedRules does not work when width = 8 (simulator crashes: ERROR: Index 63 out of bound 31 downto 0)
+    \item ReadUsedRules does not work when width = 8 (simulator crashes: ERROR: Index 63 out of bound 31 downto 0). Prints all zeroes on board
     \item Development stores previous state/type to bram. Rules does not get triggered. Are they written?
     \item Config does not store states to sblocks properly. Signal fluctuates.
 \end{itemize}
@@ -30,7 +30,7 @@
         \bfseries Instruction & \bfseries 2D & \bfseries 3D \\
         \hline
         break & Yes & Yes \\
-        clearBRAM & Yes & ? \\
+        clearBRAM & Yes & Yes \\
         config & Yes & Undecidable \\
         devstep & Undecidable & Undecidable \\
         doFitness & Undecidable & Undecidable \\
@@ -46,7 +46,7 @@
         readSums & Undecidable & Undecidable \\
         readType & Yes & Yes \\
         readTypes & Yes & Yes \\
-        readUsedRules & Undecidable & ? \\
+        readUsedRules & Undecidable & No \\
         resetDevCounter & Yes & Yes \\
         run & Undecidable & Undecidable \\
         setNumberOfLastRule & Undecidable & Undecidable \\
