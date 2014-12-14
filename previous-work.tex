@@ -18,18 +18,31 @@ It consists of the mentioned sblock matrix, BRAM for storing the state and type 
     \label{fig:overview-djupdal}
 \end{figure}
 
-\subsection{Extension: Aamodt \cite{aamodt2005sblock}}
+\todo{detailed description}
 
-\begin{itemize}
-    \item Fig. \ref{fig:overview-aamodt}
-\end{itemize}
+\todo{also software}
+
+\subsection{Extension}
+
+There was one major bottleneck in the original design.
+To calculate the fitness of an individual, the state of each cell had to be transfered to the computer over the PCI interface.
+Having a dedicated hardware unit would greatly improve the performance.
+Additionaly, it was desired to have more information about the development process.
+The task of realizing this fell to Aamodt \cite{aamodt2005sblock}.
+
+An overview of the hardware platform with Aamodt additions is shown in \figurename~\ref{fig:overview-aamodt}.
+The additions consists of a run-step function that calculates the number of live cells, BRAM to store the numbers, a fitness function, and two information outputs from the development unit.
 
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=0.48\textwidth]{figures/overview-aamodt}
-    \caption{Aamodt's additions in green}
+    \caption{High-level block diagram of hardware platform after Aamodt's work. Additions are marked in green.}
     \label{fig:overview-aamodt}
 \end{figure}
+
+\todo{detailed description}
+
+\todo{also software}
 
 \subsection{Renovation: Støvneng \cite{stovneng2014sblock}}
 
