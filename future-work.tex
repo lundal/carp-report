@@ -20,9 +20,9 @@ Currently, the platform only supports dimension sizes that are powers of 2.
 It would be beneficial to be able to select any size, allowing for fine-tuning of the resource usage, to get most out of the FPGA.
 
 As noted in \cite{stovneng2014sblock}, Støvneng increased the base instruction and data sizes from 32 to 64 bits.
-While it made sense to do so at the time to accomodate for longer instructions and optimize for the 64-bit PCI bus, PCI Express is based on a 32-bit word size, which means conversion is currently required.
+Although it does accomodate for longer instructions, the decision is a little odd, considering both PCI and PCI Express are based on a 32-bit word size \CN.
+This means that conversion is currently required between the LSS and communication units.
 Since only 6 out of 30 instructions require more than 32 bits, communication could be simplified and optimized by going back to a 32-bit base size.
-
 
 Finally, a unification of the 2D and 3D designs would be \TODO
 
