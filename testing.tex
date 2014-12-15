@@ -1,14 +1,33 @@
-\subsection{Bugs fixed}
+\todo{something about testing the com unit}
 
-\begin{itemize}
-    \item Writing states/types to BRAM (unsupported splicing of signals)
-    \item Development running infinitely (comparison of parameterized signal with constant)
-    \item WriteRule-3D not following spec (up/down swapped with north/south)
-    \item PrintTypes (wrong offsets)
-    \item ReadVector/PrintVector still 32-bit
-\end{itemize}
+\todo{8x8, 8x8x8 matrices}
 
-\subsection{Bugs remaining}
+\todo{something about testbench}
+
+Testing uncovered many bugs within the design
+
+\subsection{Fixed bugs}
+
+\emph{States and types were written to the wrong location.}
+When writing single states or types, a half-row is read from BRAM, combined with the new data, and written back to BRAM.
+Due to the usage of non-implementable code to specify how the data should be combined, the new data always ended up in the middle of the half-row.
+
+\emph{Development ran indefinitely.}
+Comparison of signals of different widths always return false.
+Due to the comparison of a parameterized signal with a constant, the development unit would not iterate through the cells, and thus never finish.
+
+\emph{WriteRule did not follow spesification.}
+When the api transformed a 3D rule struct into an instruction, the position of up/down and north/south were swapped.
+
+\emph{PrintTypes used wrong offsets for decomposition.}
+When decomposing a row of types into individual types, an offset of 5 was used instead of 8.
+This entailed that the printed values were completely wrong.
+
+\emph{ReadVector and PrintVector used 32-bit words.}
+The functions were not updated from using 32-bit to 64-bit words.
+ReadVector would therefore expect twice the number of words provided by the hardware platform, causing the program to wait for nonexistant data.
+
+\subsection{Remaining bugs}
 
 \begin{itemize}
     \item ReadStates prints garbage in top 32 bits (but they are discarded by api)
@@ -18,6 +37,8 @@
     \item Development stores previous state/type to bram. Rules does not get triggered. Are they written?
     \item Config does not store states to sblocks properly. Signal fluctuates.
 \end{itemize}
+
+\todo{list -> text}
 
 \subsection{Instructions}
 
