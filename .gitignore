@@ -31,4 +31,5 @@
 *.xdy
 *.tdo
 .*.swp
-*.pdf
+.*.swo
+report.pdf
