@@ -6,8 +6,10 @@ Luckily, the hardware design can be scaled down to fit the smaller chip by reduc
 \subsection{Spartan-6 SP605 Evaluation Platform}
 
 The Spartan-6 SP605 Evaluation Platform is essentially a board with the Spartan-6 LX45T FPGA wired to every useful peripheral imaginable.
-It has connections for PCI Express, ethernet, DVI, USB, flash card, JTAG, LEDs, switches, and more.
-However, the only peripherals utilized in this project are PCI Express, JTAG, and System ACE flash.
+It has connections for PCI Express\footnote{
+        Even though the PCI Express finger has lines for power, they are not connected on the SP605. This means an external power source has to be connected.
+    }, ethernet, DVI, USB, flash card, JTAG, LEDs, switches, and more.
+However, the only peripherals utilized in this paper are PCI Express, JTAG and System ACE flash.
 An overview of the system is shown in \figurename~\ref{fig:sp605}.
 
 \begin{figure}[!ht]
@@ -16,10 +18,6 @@ An overview of the system is shown in \figurename~\ref{fig:sp605}.
     \caption{High-level block diagram of the SP605 and its peripherals. Peripherals utilized in this paper are highlighted in gray. (Modified reprint from \cite{ug526})}
     \label{fig:sp605}
 \end{figure}
-
-\todo{pci express finger has only data}
-
-\todo{requires external power}
 
 \todo{more?}
 
