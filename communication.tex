@@ -42,7 +42,7 @@ The reception engine is implemented as a simple state machine, as shown in \figu
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=0.48\textwidth]{figures/statemachine-receive}
-    \caption{State machine of the reception engine.}
+    \caption{State machine for the reception engine.}
     \label{fig:statemachine-receive}
 \end{figure}
 
@@ -59,7 +59,7 @@ The transmission engine is implemented as a simple state machine, as shown in \f
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=0.48\textwidth]{figures/statemachine-transmit}
-    \caption{State machine of the transmission engine.}
+    \caption{State machine for the transmission engine.}
     \label{fig:statemachine-transmit}
 \end{figure}
 
@@ -74,12 +74,12 @@ Until the reception engine signals a read request, the state machine remains in 
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=0.40\textwidth]{figures/wavediagram-fifo}
-    \caption{Wave diagram for a FIFO buffer. It shows two consecutive writes followed by two consecutive reads.}
+    \caption{Wave diagram for the FIFO buffer, showing two consecutive writes followed by two consecutive reads.}
     \label{fig:wavediagram-fifo}
 \end{figure}
 
 Notice how the read signal needs to be asserted before the clock tick when data is read to ensure correct consecutive reads.
-This is due to the BRAM used within the FIFO, which updates at the clock tick.
+This is due to the BRAM used in the FIFO, which updates at clock ticks.
 Therefore, the address has to be updated before the clock tick (by the read signal) to have correct data available for a read in the following cycle.
 
 \todo{item chose native linux driver, files under /sys/devices/pci}

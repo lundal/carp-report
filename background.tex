@@ -77,9 +77,10 @@ PCI Express consists of three layers; the physical layer, the data link layer an
 The transaction layers primary responsibility is the creation and parsing of transaction layer packets (TLPs).
 TLPs are used to trigger events or start various transactions, most commonly to initiate read and write requests \footnote{
         Read and write requests are directed at one of up to six base address registers (BARs).
-        They represent different internal memory areas that can be anywhere from a few bytes to several gigabytes in size.
+        They represent internal memory areas that can be anywhere from a few bytes to several gigabytes in size.
     }.
 Most requests entail the return of a completion TLP containing the requested data or other information.
+TLPs consists of multiple 32-bit double words (DW), where the first is a common header describing the type of packet.
 
 The data link layer ensures integrity by adding error detection codes to outgoing TLPs and performing error detection and correction on incoming TLPs.
 It is also responsible for retransmission if corruption occurs.
