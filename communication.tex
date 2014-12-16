@@ -1,21 +1,30 @@
+The SP605 was pre-installed with an example design implementing communication over PCI Express with DMA.
+However, the design was created in verilog, making it hard to integrate into this VHDL project, and the accompanying driver did not support newer linux kernels.
+This forced me to implement PCI Express by myself, leaving out DMA due to complexity.
+\todo{is this any good? move to discussion?}
 
-\TODO
+Due to the difference in wordsize between the old and new communication unit, a compatibility layer is added to allow other existing code to remain unchanged.
 
-\begin{itemize}
-    \item example dma written in verilog, driver nonfunctional for linux > 2.26 (approx)
-    \item chose native linux driver, files under /sys/devices/pci
-\end{itemize}
-
-\todo{overview}
+\figurename~\ref{fig:overview-lundal} shows the changes to the hardware platform.
+The old COM40 unit has been replaced by a new communication unit and a compatibility layer.
+The compatibility layer is needed because the old COM40 unit was based on 64-bit data while PCI Express uses 32-bit data.
+\todo{blergh}
 
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=0.48\textwidth]{figures/overview-lundal}
-    \caption{Lundal's additions in green}
+    \caption{High-level block diagram of the current hardware platform. Additions are highlighted in green.}
     \label{fig:overview-lundal}
 \end{figure}
 
-\todo{describe com module}
+The communication unit has internal data buffers.
+
+On the software side, the api uses linux' built-in drivers for PCI Express.
+
+\subsection{Overview}
+
+The new communication unit is based on Xilinx' reference PCI Express programmed io design.
+It consists of the Xilinx PCI Express endpoint core, reception and transmission engines, data buffers, and a special request handler, as shown in \figurename~\ref{fig:details-communication}.
 
 \begin{figure}[!ht]
     \centering
@@ -24,7 +33,15 @@
     \label{fig:details-communication}
 \end{figure}
 
-\todo{describe reception engine}
+The endpoint core handles all three PCI Express layers, and presents transaction layer packets (TLPs) on an AXI4-Stream interface \cite{ug672}.
+The reception engine is responsible for parsing TLPs and either writing received data to the reception buffer or notifying the transmission engine about a read request.
+The transmission engine is responsible for building TLPs to respond to read requests, using data from the transmission buffer.
+The request handler listens to the read requests provided by the reception engine, and can override the transmission engine to answer special requests.
+Those currently implemented are requests for amount of space or data in both buffers.
+
+\subsection{Reception engine}
+
+The reception engine is implemented as a simple state machine, as shown in \figurename~\ref{fig:statemachine-receive}.
 
 \begin{figure}[!ht]
     \centering
@@ -33,8 +50,15 @@
     \label{fig:statemachine-receive}
 \end{figure}
 
+Until the endpoint core presents valid data, the state machine remains in idle.
+When it does, the data is stored, and the TLP type is checked.
+If it is a read or write request, the state machine continues down the corresponding path, otherwise the remaining data is discarded.
 
-\todo{describe transmission engine}
+\todo{describe reception engine}
+
+\subsection{Transmission engine}
+
+The transmission engine is implemented as a simple state machine, as shown in \figurename~\ref{fig:statemachine-transmit}.
 
 \begin{figure}[!ht]
     \centering
@@ -42,6 +66,12 @@
     \caption{State machine of the transmission engine.}
     \label{fig:statemachine-transmit}
 \end{figure}
+
+Until the reception engine signals a read request, the state machine remains in idle.
+
+\todo{describe transmission engine}
+
+\subsection{Buffers}
 
 \todo{describe fifo buffers}
 
@@ -56,3 +86,4 @@ Notice how the read signal needs to be asserted before the clock tick when data 
 This is due to the BRAM used within the FIFO, which updates at the clock tick.
 Therefore, the address has to be updated before the clock tick (by the read signal) to have correct data available for a read in the following cycle.
 
+\todo{item chose native linux driver, files under /sys/devices/pci}
