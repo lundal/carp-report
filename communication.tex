@@ -1,7 +1,3 @@
-The SP605 was pre-installed with an example design implementing communication over PCI Express with DMA.
-However, the design was created in verilog, making it hard to integrate into this VHDL project, and the accompanying driver did not support newer linux kernels.
-This forced me to implement PCI Express by myself, leaving out DMA due to complexity.
-\todo{is this any good? move to discussion?}
 
 Due to the difference in wordsize between the old and new communication unit, a compatibility layer is added to allow other existing code to remain unchanged.
 

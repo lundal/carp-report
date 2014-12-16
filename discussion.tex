@@ -1,10 +1,15 @@
 \subsection{Challenges}
 
-\begin{itemize}
-    \item Hardware trouble (switch error in user guide)
-    \item USB cable driver
-    \item DMA (written in verilog, driver broken in new kernels)
-\end{itemize}
+There was a lot of concern during initial hardware testing, as the SP605 was not detected by the computer.
+Luckily, this proved not to be a hardware fault, but a mistake in the hardware setup guide; the position of SW1 was reversed.
+
+The SP605 was pre-installed with an example design implementing communication over PCI Express with DMA.
+However, the accompanying driver did not support newer linux kernels.
+Additionaly, the design was written in verilog while CARP is written in vhdl, which meant extra effort to integrate the two.
+There was some effort applied to update the driver, but it was abandoned due to near-untraceable segfaults.
+
+The USB cable driver for usage of JTAG provided by Xilinx also had the problem of not being compatible with newer linux kernels.
+Thankfully, a the driver found at \cite{usbdriver} is compatible and solves the problem.
 
 \subsection{Current status}
 
