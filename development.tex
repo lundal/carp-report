@@ -19,7 +19,7 @@ An overview of the system is shown in \figurename~\ref{fig:sp605}.
     \label{fig:sp605}
 \end{figure}
 
-\todo{more?}
+The switch and jumper configurations of the SP605 are set to factory defaults, with the exception of SW1 which is set to 10.
 
 \subsection{Hardware setup}
 
@@ -36,18 +36,13 @@ The other is the host for the SP605; it is mounted in a PCI Express expansion sl
 
 The setup allows a new design to be uploaded and tested on the SP605 without the need to reboot the main workstation, due to the power-cycle required to reset the PCI Express connection.
 
-\todo{more?}
-
 \subsection{Software setup}
 
 The operating system on both computers is Linux Mint; version 16 on the development computer and 17 on the test computer.
 Linux Mint is currently one of the most popular linux distributions, along with Ubuntu, which it is based upon \cite{distrowatch}.
-This means the procedures in this paper should be applicable to most systems.
+This means that procedures in this paper should be applicable to most systems.
 
-For hardware design, Xilinx ISE 13.3 was used
-The hardware design software \TODO
-
-\todo{USB driver}
-
-\todo{Xilinx ISE 13.3, GCC 4.8.2}
+Xilinx ISE version 13.3 was used for hardware design and synthesis, while ISim was used for simulations.
+The third-party USB cable driver from \cite{usbdriver} was used for JTAG, as explained in Section~\ref{sec:challenges}.
+The software API was compiled with GCC version 4.8.2.
 
