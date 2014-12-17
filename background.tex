@@ -35,14 +35,14 @@
     \item Plasticity
 \end{itemize}
 
-\subsection{Sblock}
+\subsection{Field Programmable Gate Array}
 
-\begin{itemize}
-    \item \cite{haddow2000sblock}
-    \item Haddow
-\end{itemize}
-
-\subsection{FPGA}
+A Field Programmable Gate Array (FPGA) is a type of reconfigurable hardware.
+It can implement any desired logical operation by configuring and connecting a number of look-up tables (LUTs) and flip-flops (FFs).
+FPGAs can also contain dedicated blocks for adding, multiplying, random access memory (RAM) and other functions.
+Configurable elements are grouped into configurable logic blocks (CLBs), which through a network of interconnects can be connected to each other or input/output pins.
+An example of this structure is shown in \figurename~\ref{fig:fpga}.
+Note that modern FPGAs consists of thousands of CLBs and hundreds of I/O pins \cite{ds160}.
 
 \begin{figure}[!ht]
     \centering
@@ -51,7 +51,22 @@
     \label{fig:fpga}
 \end{figure}
 
-\TODO
+FPGAs have been the subject of EHW research due to their reconfigurability, and several researchers have been successful in evolving working electronic circuits \cite{huelsbergen1998evolution, thompson1997evolved}.
+However, the resulting circuits have often ended up using intrinsic properties of the silicon \CN.
+\todo{use broken parts}
+
+The trouble with using modern FPGAs for EHW research is that some configuration bitstrings can destroy the FPGA \cite{ug380, xapp151}.
+This means that the bitstring can not be used directly as the genotype without complicated tests to discard those bitstrings that might destroy the FPGA.
+One solution to this problem is the sblock. \todo{does this sentence fit in here?}
+
+\subsection{Sblock}
+
+\begin{itemize}
+    \item Haddow: \cite{haddow2000sblock}
+    \item Basicly a configurable CA
+    \item Virtual FPGA
+    \item Add figure
+\end{itemize}
 
 \subsection{PCI Express}
 
