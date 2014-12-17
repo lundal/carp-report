@@ -117,4 +117,7 @@ Notice how the read signal needs to be asserted before the clock tick when data 
 This is due to the BRAM used in the FIFO, which updates at clock ticks.
 Therefore, the address has to be updated before the clock tick (by the read signal) to have correct data available for a read in the following cycle.
 
-\todo{item chose native linux driver, files under /sys/devices/pci}
+\subsection{Software API}
+
+\todo{native linux driver, files under /sys/devices/pci}
+
