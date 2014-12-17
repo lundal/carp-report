@@ -1,11 +1,13 @@
-.PHONY: all purge
+.PHONY: all clean purge
 all:
 	pdflatex report
 	bibtex report
 	pdflatex report
 	pdflatex report
 
-purge:
+clean:
 	git clean -xdf
+
+purge: clean
 	git reset --hard
 
