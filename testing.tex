@@ -6,7 +6,7 @@
 
 Testing uncovered many bugs within the design
 
-\subsection{Fixed bugs}
+\subsection{Fixed issues}
 
 \emph{States and types were written to the wrong location.}
 When writing single states or types, a half-row is read from BRAM, combined with the new data, and written back to BRAM.
@@ -27,18 +27,32 @@ This entailed that the printed values were completely wrong.
 The functions were not updated from using 32-bit to 64-bit words.
 ReadVector would therefore expect twice the number of words provided by the hardware platform, causing the program to wait for nonexistant data.
 
-\subsection{Remaining bugs}
+\subsection{Remaining issues}
 
-\begin{itemize}
-    \item ReadStates prints garbage in top 32 bits (but they are discarded by api)
-    \item WriteStates writes two rows, then on the next layer, and only uses least significant 32 bits. Intended behavior? (sim only)
-    \item ReadRuleVector sends an extra word the first time, every word thereafter is offset by one
-    \item ReadUsedRules does not work when width = 8 (simulator crashes: ERROR: Index 63 out of bound 31 downto 0). Prints all zeroes on board
-    \item Development stores previous state/type to bram. Rules does not get triggered. Are they written?
-    \item Config does not store states to sblocks properly. Signal fluctuates.
-\end{itemize}
+\emph{ReadStates prints gargabe in top 32 bits.}
+This occurs due to a buffering error in the LSS unit.
+However, only the least 32 bits are used by the api, which means that this issue only impacts performance and not functionality.
 
-\todo{list -> text}
+\emph{WriteStates and WriteTypes does nothing in 3D.}
+This issue is only present on the board, not in any simulations, which makes it hard to track down the cause.
+
+\emph{ReadRuleVector sends incorrect data.}
+The first execution of the instruction produces an extra word; a repetition of the first.
+Following executions produces the correct amount of words, but the order is offset by one.
+
+\emph{ReadUsedRules fails for SBM widths less than 16.}
+The simulator crashes with an index-out-of-bounds error, due to the instruction accessing bit 63 of a signal that is $[width\cdot4]$ bits wide.
+How ISE is able to implement the design despite illegal indexing is a mystery, but the instruction produces only zeroes on the board.
+
+\emph{Development rules does not activate.}
+This issue is also only present on the board, making it hard to analyze.
+The root cause could be with any of the following instructions: devstep, writeRule and setNumberOfLastRule.
+
+\emph{Config does not properly write states in 3D.}
+Simulations show that the BRAM address fluctuates \TODO.
+
+\emph{Runstep causes every state to become zero.}
+\TODO
 
 \subsection{Current status}
 
