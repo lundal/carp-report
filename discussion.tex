@@ -24,7 +24,7 @@ Thankfully, a the driver found at \cite{usbdriver} is compatible and solves the 
 
 The most important thing going forward is to fix the errors that are preventing the sblockmatrix and development units from working correctly.
 However, this is no easy task, as large parts of the design are highly complex and difficult to debug.
-The most extreme cases are the development and lss units which each consists of a single large file, around 1200 lines long, of complex pipelined code.
+The most extreme cases are the development and LSS units which each consists of a single large file, around 1200 lines long, of complex pipelined code.
 Simplification and modularization of these units is therefore imperative.
 
 Another reason to simplify the development unit is it's extreme memory bandwidth requirement against the SBM BRAM.
@@ -62,6 +62,6 @@ Finally, a unification of the 2D and 3D designs would be \TODO
     \item Toggle SBM wrap-around
 \end{itemize}
 
-With the current need for major fixes, simplification of development and lss, reducing the need for extreme memory bandwidth, removing tristates, removing resets, and unification, it might be a good idea to rebuild the platform from the ground up.
+With the current need for major fixes, simplification of development and LSS, reducing the need for extreme memory bandwidth, removing tristates, removing resets, and unification, it might be a good idea to rebuild the platform from the ground up.
 Starting from a clean slate, thoroughly evaluating every part of the design, replacing the bad features and improving the good, will likely result in a greatly improved platform for CA research.
 
