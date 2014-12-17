@@ -121,5 +121,14 @@ To have correct data available for a read in the following cycle, the address th
 
 \subsection{Software API}
 
-\todo{native linux driver, files under /sys/devices/pci}
+The communication part of the new software API is split into two parts.
+
+The first is a general interface for connecting to PCI and PCI Express devices without using a custom driver.
+It takes advantage of Linux' automatic population of /sys/devices/pci* with files representing the memory regions of all PCI and PCI Express devices.
+The directory is searched by vendor and device id, and the corresponding memory regions is memory-mapped into the program.
+
+The second is an interface specifically for the communication unit.
+It provides open, close, read and write functions similar to the old BenERA interface, in addition to implementing all special request functions in Table~\ref{tab:requests}.
+When a read or write operation is initiated, buffers are checked for available data or space.
+If there is not enough present, the program waits and then rechecks.
 
