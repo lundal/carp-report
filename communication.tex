@@ -104,7 +104,9 @@ If the request has a greater length, the returned data is simply repeated that n
 
 \subsection{Buffers}
 
-\todo{describe fifo buffers}
+The buffers are implemented as first-in first-out (FIFO) queues using block RAM (BRAM) and two counters.
+The counters deterimine the addresses that are written to and read from, and are incremented when the write or read signals are asserted.
+\figurename~\ref{fig:wavediagram-fifo} shows how the FIFO is used to buffer two words.
 
 \begin{figure}[!ht]
     \centering
@@ -115,7 +117,7 @@ If the request has a greater length, the returned data is simply repeated that n
 
 Notice how the read signal needs to be asserted before the clock tick when data is read to ensure correct consecutive reads.
 This is due to the BRAM used in the FIFO, which updates at clock ticks.
-Therefore, the address has to be updated before the clock tick (by the read signal) to have correct data available for a read in the following cycle.
+To have correct data available for a read in the following cycle, the address therefore has to be updated before the clock tick (by asserting the read signal).
 
 \subsection{Software API}
 
