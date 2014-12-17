@@ -1,12 +1,19 @@
+\todo{Støvneng verified everything in simulation. But as we all know, simulation and implementation can differ.}
+
 \todo{something about testing the com unit}
 
 \todo{8x8, 8x8x8 matrices}
 
 \todo{something about testbench}
 
-Testing uncovered many bugs within the design
+Testing uncovered many issues within the design
 
-\subsection{Fixed issues}
+\subsection{Communication}
+
+The communication unit was tested in hardware by connecting the output of the reception buffer to the input of the transmission buffer.
+Then, sample data was sent over PCI Express to the SP605, before being then read back.
+
+\subsection{Solved issues}
 
 \emph{States and types were written to the wrong location.}
 When writing single states or types, a half-row is read from BRAM, combined with the new data, and written back to BRAM.
@@ -29,7 +36,7 @@ ReadVector would therefore expect twice the number of words provided by the hard
 
 \subsection{Remaining issues}
 
-\emph{ReadStates prints gargabe in top 32 bits.}
+\emph{ReadStates prints garbage in top 32 bits.}
 This occurs due to a buffering error in the LSS unit.
 However, only the least 32 bits are used by the api, which means that this issue only impacts performance and not functionality.
 
@@ -41,8 +48,8 @@ The first execution of the instruction produces an extra word; a repetition of t
 Following executions produces the correct amount of words, but the order is offset by one.
 
 \emph{ReadUsedRules fails for SBM widths less than 16.}
-The simulator crashes with an index-out-of-bounds error, due to the instruction accessing bit 63 of a signal that is $[width\cdot4]$ bits wide.
-How ISE is able to implement the design despite illegal indexing is a mystery, but the instruction produces only zeroes on the board.
+The simulator crashes with an index-out-of-bounds error, due to the instruction treating a $[width\cdot4]$ bits wide signal as if it is 64 bits wide.
+How ISE is able to implement the design despite illegal indexing is a mystery, but the instruction produces only zeroes when executed on the board.
 
 \emph{Development rules does not activate.}
 This issue is also only present on the board, making it hard to analyze.
