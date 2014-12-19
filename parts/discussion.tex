@@ -13,16 +13,18 @@ Additionaly, the design was written in verilog while CARP is written in vhdl, wh
 There was some effort applied to update the driver, but it was abandoned due to near-untraceable segfaults.
 
 The USB cable driver for usage of JTAG provided by Xilinx also had the problem of not being compatible with newer linux kernels.
-Thankfully, a the driver found at \cite{usbdriver} is compatible and solves the problem.
+Thankfully, a third-party driver found at \cite{usbdriver} is compatible and solves the problem.
 
-\todo{Development bug}
-
-\begin{itemize}
-    \item Works in post-translate sim
-    \item Doesn't work on dev board
-    \item All post-map and post-par simulations give X'es
-    \item Can't keep\_hierarchy to trace source
-\end{itemize}
+For unknown reasons, collisions occur on vital signals in all post-map and post-place-and-route simulations\footnotemark, causing them to be of no use.
+\footnotetext{
+    The order of the implementation process is: Synthesize, translate, map, place-and-route.
+}
+This makes it impossible to analyze issues that are present in implementation but not in post-translate simulation.
+Since ISE will not respect the \emph{keep\_hierarchy}\footnotemark attribute for the unit in which the collision is first observed, tracing of the source has been unsuccessful.
+\footnotetext{
+    The \emph{keep\_hierarchy} attribute informs the synthesis tool that it should not flatten hardware design units to allow further optimizations.
+    This is useful since the opimizations rename and split signals, making it near-impossible to trace anything.
+}
 
 \subsection{Future work}
 
@@ -52,19 +54,26 @@ Although it is one way to accomodate for longer instructions, the decision is a 
 This means that conversion is currently required between the LSS and communication units.
 Since only 6 out of 30 instructions require more than 32 bits, communication could be simplified and optimized by going back to a 32-bit base size.
 
-Finally, a unification of the 2D and 3D designs would be \TODO
+The current design makes use of a lot of internal tristate buffers.
+These are not supported in modern FPGAs \cite{koch2008buses}, and therefore need to be converted into other logic during synthesis.
+The synthesis tool gently hints at this misuse by producing several warnings.
+Removing tristate buffers will therefore result in code that more closely relates to its implementation.
 
-\begin{itemize}
-    \item Com buffer checks
-    \item Get rid of tristate buffers \cite{koch2008buses}
-    \item Get rid of reset (init values in \cite{ug687} page 55-56, \cite{wp272} page 5)
-    \item Use generics instead of global constants
-    \item Unify 2D and 3D designs
-    \item Add instruction that reports info (2D/3D, SIZE, ++)
-    \item Add general purpose counters
-    \item DMA (better performance?)
-    \item Toggle SBM wrap-around
-\end{itemize}
+Another feature that can beneficially be removed is the global asynchronous reset.
+Since all Xilinx FPGAs start in a well defined state, a reset signal is only needed in very spesific cases \cite{ug687} \cite{wp272}.
+Otherwise, it only serves to take up valuable resources.
+
+Having the software interface automaticly adapt to the implemented hardware platform would be nifty.
+This would remove the need to specify the sblock matrix size and type at compilation.
+It could be accomplished by adding an instruction that returns the size of the sblock matrix.
+
+A feature that could be interesting is the ability to enable or disable wrap-around for the edges of the sblock matrix.
+Disabling it would mean that the size of the matrix can not be exploited to create an oscillating signal by signal moving in one direction.
+
+\todo{dma?}
+
+Finally, a unification of the 2D and 3D designs would be allow less code to be maintained.
+\todo{a bit more}
 
 With the current need for major fixes, simplification of development and LSS, reducing the need for extreme memory bandwidth, removing tristates, removing resets, and unification, it might be a good idea to rebuild the platform from the ground up.
 Starting from a clean slate, thoroughly evaluating every part of the design, replacing the bad features and improving the good, will likely result in a greatly improved platform for CA research.
