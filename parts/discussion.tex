@@ -38,10 +38,10 @@ Currently, the it is designed so that N rules are loaded, applied to every cell,
 This means that the SBM BRAM must supply 5 rows each cycle to test 1 row per cycle (or 8 for 2) in 3D, while N rules are needed per matrix iteration.
 In addition, after the first pass, cells has to be read from BRAM B instead of BRAM A, since some cells might have changed.
 
-A simplified process would be to read 5 rows, apply one rule to the center row each cycle, then read the next 5 rows, and so on.
-This will greatly lessen the bandwidth requirements against the SBM BRAM, as the rows can be read in sequence while each rule is being applied.
+A simplified process is be to read 5 rows, apply one rule to the center row each cycle, then read the next 5 rows, and so on.
+This will greatly lessen the bandwidth requirements against the SBM BRAM, as new rows can be read in sequence while each rule is being applied to the current.
 Assuming there are more rules than the number of rows that must be read (highly likely), there is no performance loss.
-Additionally, this would allow development to only read from BRAM A.
+Additionally, this would allow development to only read from BRAM A, simplifying the dataflow.
 
 There are still some remains of having two clock domains, more specificaly a pair of flipflops used for clock-synchronization in the fetch and lss units.
 It does not affect functionality, and has therefore been of low priority, but it does add a slight delay between the communication unit and the fetch and lss units when reading data.
