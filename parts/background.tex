@@ -1,46 +1,63 @@
-\TODO
+\subsection{Evolvable hardware}
 
-\subsection{Cellular Automata}
+Evolvable hardware (EHW) is a field of science where evolutionary algorithms (EAs) are used in the creation of specialized hardware.
+Taking inspiration from nature, artificial evolution is 
 
-\begin{itemize}
-    \item What is a Cellular Automata?
-    \item Turing-complete CA with 29 states \cite{neumann1966selfreplication}.
-    \item Codd: Turing-complete CA with 8 states, given some conditions \cite{codd1968cellular}
-    \item Langton's research on emergent computation and phase transition \cite{langton1990edgeofchaos}.
-    \item Wolfram's four qualitative CA classes \cite{wolfram1984complexity}?
-\end{itemize}
+Evolvable hardware was born out of the desire to take advantage of principles of biological systems for computation.
+
+\todo{rewrite}
+
+Evolution:
+Principles of life
+Genetic Algorithms
+Evolution in materio/silicon \cite{miller2014evolution}
+
+Development:
+\cite{harding2008artificial} \cite{tufte2008evodevo}
+Zygote
+Scalability
+Robustness
+Plasticity
+
+\subsection{Cellular automata}
+
+\todo{resembles biological stuff}
+
+A cellular automaton (CA) is a structure made up of vast numbers of very simple computational units called cells.
+The cells are arranged in a grid, with communication only permitted between nearby cells according to a neighborhood.
+The von Neumann neighborhood is common for two-dimensional CAs \CN;
+It includes the cells to the north, south, east and west, along with itself (center).
+An example of this is shown in \figurename~\ref{fig:ca}.
 
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=0.25\textwidth]{figures/ca}
-    \caption{An excerpt from a 2D CA with a von Neumann neighborhood. All outputs from a given cell carries the same value.}
-    \label{fig:sblock}
+    \caption{An excerpt from a 2D CA using a von Neumann neighborhood. All outputs from a given cell carries the same value.}
+    \label{fig:ca}
 \end{figure}
 
-\subsection{Self-Replication}
+Each cell has a state, which is often a binary number where 1 represents alive and 0 represents dead.
+At each discrete time step, each cell updates its state based on the states in its neighborhood.
+The update function is often specified as a look-up-table (LUT), where the next state is defined for all possible neighborhood states\footnotemark.
+\footnotetext{
+    The length of the LUT increases exponentially with the size of the neighborhood.
+    $L=S^N$ where $L$ is the LUT length, $S$ is the number of possible states and $N$ is the number of cells in the neighborhood.
+}
+If all cells implement the same update function then the CA is uniform, otherwise it is non-uniform.
 
-\begin{itemize}
-    \item von Neumann's work on self-replication from around 1950 \cite{neumann1966selfreplication}.
-    \item Self-replicating structures \cite{reggia1998neumann}
-    \item Replicating universal computers with 63 states and 8500 rules \cite{perrier1996toward}.
-\end{itemize}
+CAs have been shown to be Turing complete \cite{neumann1966selfreplication, codd1968cellular}, which means they are able to perform any kind of computation.
 
-\subsection{Evolution}
 
-\begin{itemize}
-    \item Genetic Algorithms
-    \item Evolution in materio/silicon \cite{miller2014evolution}
-\end{itemize}
+Usage in EHW:
+Langton's research on emergent computation and phase transition \cite{langton1990edgeofchaos}.
+Wolfram's four qualitative CA classes \cite{wolfram1984complexity}.
 
-\subsection{Artificial Development}
+Due to their resemblance to biological systems, CAs have been 
 
-\begin{itemize}
-    \item \cite{harding2008artificial} \cite{tufte2008evodevo}
-    \item Zygote
-    \item Scalability
-    \item Robustness
-    \item Plasticity
-\end{itemize}
+Self-Replication:
+von Neumann's work on self-replication from around 1950 \cite{neumann1966selfreplication}.
+Self-replicating structures \cite{reggia1998neumann}.
+Replicating universal computers with 63 states and 8500 rules \cite{perrier1996toward}.
 
 \subsection{Field Programmable Gate Array}
 
