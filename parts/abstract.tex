@@ -1,19 +1,28 @@
-\todo{rewrite this}
+%Evolvable hardware is... \TODO
+%
+Research into evolvable hardware has long been performed at NTNU.
+In 2003, a cellular automata research platform was created with the use of an FPGA.
+It was based on a two-dimensional matrix of sblocks, with built-in support for development.
 
-EHW research has been performed at NTNU for a long time.
-In 2003 a CA research platform was created on an FPGA
-It was based on a matrix sblocks, and has later been expanded.
+In expectation of new hardware with a larger FPGA, the platform was updated and extended in 2014.
+It was optimized to provide a speedup of 4 for most operations by taking advantage of increased resources.
+%The addition of a DFT and extension of the sblock matric into three dimensions were also promising new features.
+However, since the hardware did not arrive in time, the new PCI Express interface was not implemented.
+This also meant that new design could only be verified in simulation.
 
-In expectiation of new hardware (larger FPGA, PCI Express), Støvneng recently updated and optimized the platform.
-He also extended the sblockmatrix into 3D and added DFT.
-The hardware did not arrive, therefore communication was not updated, and things were only tested in simulation.
+The goal of this project was to finalize the platform, such that the new features and improved speed could be taken advantage of.
+The first objective towards that end was to replace the old communication interface.
+The second was to verify that the new design worked correctly when implemented in hardware.
 
-The purpose of this project is to finish the platform so that it can be used for research.
-The first thing is to replace the old PCI communication module with one for PCI Express.
-The second is to verify that Støvnengs updates works when implemented on the hardware.
+%Since the desired hardware was still unavailable at the start of this project, similar hardware with a smaller FPGA was procured instead.
+%Although the maximum size of the sblock matrix was greatly reduced, it would allow for implementation of the new communication interface and verification of the design.
 
-Hardware could not be delivered, so used SP605 instead, which has a smaller FPGA.
+This paper details the implementation of the new communication interface, both in hardware and software.
+Then, the previously upgraded design is implemented and tested in the new hardware.
 
-The communication unit and software interface is implemented.
-Verification shows the existing design has a lot of issues.
+Implementation of the new communication interface is a success.
+However, testing shows that there are a lot of issues with the upgraded design.
+Some issues were possible to fix within the alotted time, but several critical remain.
+
+%\todo{shorten this some?}
 
