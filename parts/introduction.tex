@@ -1,17 +1,27 @@
-\TODO
+\todo{in general about evolvable hardware}
 
-\begin{itemize}
-    \item CARP is platform for EHW research
-    \item uses a 2D/3D matrix of sblocks (CA)
-    \item can perform development
-    \item has built in fitness function, dft
-\end{itemize}
+The principles behind evolvable hardware and related technologies are presented in detail in Section~\ref{sec:background}.
 
-\todo{expand:}
+Evolvable hardware has been an area of research at NTNU for more than a decade.
+In 2002, NTNU invested in dedicated FPGA hardware for the usage as an evolutionary hardware platform \todo{fix sentence}.
+The purpose was to create a platform for experimentation with evolution and development within a cellular automata (CA).
 
-Section~\ref{sec:background} explains the principles behind evolvable hardware, along with CAs, FPGAs, and PCI Express.
+The initial work was done by Djupdal, before being extended by Aamodt.
+The CA was implemented as a matrix of sblocks, reprogrammable CA cells designed specifically for usage with evolution.
+It is connected to a development unit which can perform growth and change on the sblocks \todo{fix sentence}.
+The hardware platform is connected to and controlled by a computer over a PCI connection.
 
-Section~\ref{sec:previous-work} goes into detail about the work that has previously gone into the platform.
+A general use-case for the platform is to have the computer run a genetic algorithm, where the genotype represents the initial CA state and development rules.
+Then, the CA is initialized and developed to produce a fenotype, which is executed to produce a fitness value.
+
+In expectation of new hardware with a larger FPGA and faster PCI Express connection, Støvneng refurbished the design in 2014.
+He took advantage of the added resources to greatly improve the performance of the platform, giving a speedup of 4 or more for most operations.
+Additionally, he extended the CA into 3D and added a DFT.
+However, since the hardware did not arrive in time, the new design was only tested in simulation and the communication interface was not upgraded.
+
+An in-depth explanation of the platform's features, functionality and iterations is presented in Section~\ref{sec:previous-work}.
+
+\todo{expand}
 
 Section~\ref{sec:motivation} explains the motivations for continuing the work on the platform.
 
