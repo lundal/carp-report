@@ -37,7 +37,23 @@ The request handler listens to the read requests provided by the reception engin
 
 \subsection{PCI Express Endpoint Core}
 
-\todo{bars, wrapper, id, more?}
+Several Spartan-6 FPGAs, including the one used in this project, contain a special-purpose hardware block for implementation of PCI Express.
+The block completely handles the physical and data link layers, with the transaction layer left for the user.
+
+To make use of the block, Xilinx provides the Spartan-6 Integrated PCI Express Endpoint Core; version 2.3 was used in this project.
+This core additionally takes care of all TLPs related to configuration of the PCI Express connection.
+Other TLPs, such as read and write requests, are presented on an AXI4-Stream interface \cite{ug672}.
+
+The endpoint core is configured with two memory regions, both 4 kB in size\footnotemark.
+\footnotetext{
+    The smallest memory region that can be memory-mapped is one page. The default page size in Linux is 4 kB.
+}
+The first memory region (BAR0) is used for normal communication, while the second (BAR1) is used for special requests.
+The separaton is mostly conseptual as both regions are treated like a singular stream.
+The difference is that the special request handler kicks in for read requests to BAR1.
+
+\todo{wrapper?}
+\todo{vendor/device id?}
 
 \subsection{Reception engine}
 
