@@ -53,9 +53,13 @@ The additions consists of a run-step function that calculates the number of live
     \label{fig:overview-aamodt}
 \end{figure}
 
-\todo{detailed description}
+The rule vector BRAM stores lists of which rules were triggered and not for the last 256 development steps.
+The lists are called rule vectors since they are implemented as bit-vectors where each bit represents the status of a rule for a single development step.
+The development step BRAM is more detailed; it stores which rule was triggered for each cell.
+However, it only has storage space for one development step.
 
-\todo{also software}
+The run-step function calculates the number of live cells after each run step by using a large adder network.
+The numbers are stored in run-step BRAM for later usage by the fitness function, which is replacable.
 
 \subsection{Renovation}
 
