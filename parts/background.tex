@@ -3,11 +3,29 @@ This section covers \TODO
 \subsection{Evolvable hardware}
 
 Evolvable hardware (EHW) is a field of science where evolutionary algorithms (EAs) are used in the creation of specialized hardware.
-Taking inspiration from nature, artificial evolution is 
+EAs simulate mechanisms found in biological life, such as selection, reproduction and mutation.
+The goal is to optimize fitness, the ability to survive in the competition for being the best solution to a problem.
+EAs can quickly find ok solutions to a problem, and then gradually keep refining them into good solutions.
 
-Evolvable hardware was born out of the desire to take advantage of principles of biological systems for computation.
+A genetic algorithm (GA) is a very common type of EA.
+It represents each solution as a genotype, a binary string describing how the solution itself, the phenotype, should be constructed.
+The genotype is comparable to nature's DNA, and it is this genetic material which is modified in the evolutionary process.
 
-\todo{rewrite}
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.48\textwidth]{figures/ga}
+    \caption{A genetic algorithm. The cycle is broken when the fitness is above a given threshold.}
+    \label{fig:ga}
+\end{figure}
+
+The GA process is shown in \figurename~\ref{fig:ga}.
+First, a base population with random genotypes is constructed.
+Then, each phenotype is constructed and evaluated using a fitness function.
+If a solution has a fitness score above a set threshold, the process stops.
+Otherwise, a new population is created by selecting solutions with high fitness scores, crossing their genotypes, and mutating the results.
+Then the process repeats.
+
+\todo{expand}
 
 Evolution:
 Principles of life
