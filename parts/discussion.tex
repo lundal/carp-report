@@ -3,6 +3,8 @@
 \subsection{Challenges}
 \label{sec:challenges}
 
+\todo{Took several weeks to get any hardware}
+
 There was a lot of concern during initial hardware testing, as the SP605 was not detected by the computer.
 A slightly curved circuit board led to the beilief that there might be something wrong with hardware.
 Luckily, it proved not to be a hardware fault, but a mistake in the hardware setup guide; the position of SW1 was reversed, causing the board to operate in a completely different mode.
@@ -23,7 +25,7 @@ This makes it impossible to analyze issues that are present in implementation bu
 Since ISE will not respect the \emph{keep\_hierarchy}\footnotemark attribute for the unit in which the collision is first observed, tracing of the source has been unsuccessful.
 \footnotetext{
     The \emph{keep\_hierarchy} attribute informs the synthesis tool that it should not flatten hardware design units to allow further optimizations.
-    This is useful since the opimizations rename and split signals, making it near-impossible to trace anything.
+    This is useful since the opimizations makes it near-impossible to trace signals.
 }
 
 \subsection{Future work}
@@ -72,8 +74,7 @@ Disabling it would mean that the size of the matrix can not be exploited to crea
 
 \todo{dma?}
 
-Finally, a unification of the 2D and 3D designs would be allow less code to be maintained.
-\todo{a bit more}
+Finally, a unification of the 2D and 3D designs would give a more generic design and allow less code to be maintained.
 
 With the current need for major fixes, simplification of development and LSS, reducing the need for extreme memory bandwidth, removing tristates, removing resets, and unification, it might be a good idea to rebuild the platform from the ground up.
 Starting from a clean slate, thoroughly evaluating every part of the design, replacing the bad features and improving the good, will likely result in a greatly improved platform for CA research.
