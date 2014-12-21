@@ -65,7 +65,7 @@ The update function is often specified as a look-up-table (LUT), where the next 
 }
 If all cells implement the same update function then the CA is uniform, otherwise it is non-uniform.
 
-CAs have been shown to be Turing complete \cite{neumann1966selfreplication, codd1968cellular}, which means they are able to perform any kind of computation.
+CAs have been shown to be Turing complete \cite{neumann1966selfreplication} \cite{codd1968cellular}, which means they are able to perform any kind of computation.
 
 
 Usage in EHW:
@@ -95,10 +95,10 @@ Note that modern FPGAs consists of thousands of CLBs and hundreds of I/O pins \c
     \label{fig:fpga}
 \end{figure}
 
-FPGAs have been the subject of EHW research due to their reconfigurability, and several researchers have been successful in evolving working electronic circuits \cite{huelsbergen1998evolution, thompson1997evolved}.
+FPGAs have been the subject of EHW research due to their reconfigurability, and several researchers have been successful in evolving working electronic circuits \cite{huelsbergen1998evolution} \cite{thompson1997evolved}.
 However, the resulting circuits have often ended up using intrinsic properties of the silicon and been very sensitive to environmental changes.
 
-The trouble with using modern FPGAs for EHW research is that some configuration bitstrings can destroy the FPGA \cite{ug380, xapp151}.
+The trouble with using modern FPGAs for EHW research is that some configuration bitstrings can destroy the FPGA \cite{ug380} \cite{xapp151}.
 This means that the bitstring can not be used directly as the genotype without complicated tests to discard the dangerous bitstrings.
 One solution to this problem is the sblock. \todo{does this sentence fit in here?}
 
