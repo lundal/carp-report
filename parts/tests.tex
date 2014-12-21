@@ -1,0 +1,27 @@
+The tests used to verify the hardware design are detailed in Table \ref{tab:tests}.
+Each test has a short description and a list of the instructions they verify.
+Together, the tests cover all instructions.
+
+\begin{table}[!ht]
+    \renewcommand{\arraystretch}{1.3}
+    \caption{Test descriptions}
+    \label{tab:tests}
+    \centering
+    \begin{tabular}{c|p{0.55\linewidth}|p{0.25\linewidth}}
+        \bfseries Test & \bfseries Description & \bfseries Verifies \\
+        \hline
+        0 & Write and read single types & WriteType, ReadType \\
+        1 & Write and read multiple types & WriteTypes, ReadTypes \\
+        2 & Write and read single states & WriteState, ReadState \\
+        3 & Write and read multiple states & WriteStates, ReadStates \\
+        4 & Write states and types, clear BRAM, check BRAM is empty & ClearBRAM \\
+        5 & Write states and types, switch BRAM, check data is gone, switch again, check data is back & SwitchSBM \\
+        6 & Write rules and types, run devstep, check rule has triggered and types have updated & DevStep, WriteRule, ReadRuleVector, ReadUsedRules \\
+        7 & Write and read state to/from sblockmatrix & Config, Readback \\
+        8 & Write states, types and LUTConv, run sblockmatrix, check states have changed & Run, WriteLUTConv \\
+        9 & Store program that prints 1 and then stops, jump to program address 3 times, check for three 1's & Store, End, Jump, Break \\
+        10 & Execute program that prints 1, runs devstep and jumps to itself unless 3 devsteps has run, check for three 1's & JumpEqual, ResetDevCounter \\
+        & \todo{expand entries?}
+    \end{tabular}
+\end{table}
+
