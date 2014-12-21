@@ -81,16 +81,12 @@ However, the resulting circuits have often ended up using intrinsic properties o
 
 The trouble with using modern FPGAs for EHW research is that some configuration bitstrings can destroy the FPGA \cite{ug380} \cite{xapp151}.
 This means that the bitstring can not be used directly as the genotype without complicated tests to discard the dangerous bitstrings.
-One solution to this problem is the sblock. \todo{does this sentence fit in here?}
 
 \subsection{Sblock}
 
-\begin{itemize}
-    \item Haddow: \cite{haddow2000sblock}
-    \item Basicly a configurable CA
-    \item Virtual FPGA
-    \item Add figure
-\end{itemize}
+The sblock was introduced as part of a new EHW-friendly FPGA architecture in \cite{haddow2000sblock}.
+The architecture is a non-uniform CA with a von Neumann neighborhood, where the update function of each cell is independantly configurable at run-time.
+Each cell, called an sblock, is a very simple structure; it consists of a configurable look-up-table (LUT) and a flip-flop (FF), as shown in \figurename~\ref{fig:sblock}.
 
 \begin{figure}[!ht]
     \centering
@@ -98,6 +94,11 @@ One solution to this problem is the sblock. \todo{does this sentence fit in here
     \caption{Detailed block diagram of an sblock. The LUT can be reconfigured on-the-fly to implement any logical function.}
     \label{fig:sblock}
 \end{figure}
+
+The greatest benefit of using sblocks for EHW research is that there is no risk of damage or exploitation of intrinsic properties in the silicon.
+Additionaly, the simple structure and hardwired signal routing allows for more efficient area usage than a traditional FPGA.
+The likelihood of a mass-produced sblock-FPGA arriving on the market in the near future is slim.
+However, it is possible to implement it virtually within another FPGA.
 
 \subsection{PCI Express}
 
