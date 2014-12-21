@@ -1,19 +1,70 @@
-\TODO
-
-\subsection{Hardware (VHDL)}
+Directory structure:
 
 \begin{itemize}
-    \item 2D
-    \item 3D
-    \item common
-    \item ipcore\_dir
+    \item hardware
+    \begin{itemize}
+        \item 2D
+        \item 3D
+        \item common
+        \begin{itemize}
+            \item communication
+            \item inferers
+            \item utility
+        \end{itemize}
+        \item ipcore\_dir
+        \item sp605
+    \end{itemize}
+    \item software
+    \begin{itemize}
+        \item 2D
+        \item 3D
+        \item common
+    \end{itemize}
 \end{itemize}
 
-\subsection{Software (API)}
+List of new files:
 
 \begin{itemize}
-    \item 2D
-    \item 3D
-    \item common
+    \item hardware/common/communication
+    \begin{itemize}
+        \item \emph{com40\_compatibility\_layer.vhd}: The compatibility layer between the control unit and the communication unit.
+        \item \emph{communication.vhd}: The new communication module.
+        \item \emph{communication\_sim.vhd}: A "fake" communication module that provides external access to the buffers, used to allow simulation.
+        \item \emph{rx\_engine.vhd}: The reception engine, responsible for parsing TLPs.
+        \item \emph{tx\_engine.vhd}: The transmission engine, responsible for building TLPs.
+        \item \emph{rq\_special.vhd}: The special request handler.
+    \end{itemize}
+    \item hardware/common/utility
+    \begin{itemize}
+        \item \emph{combiner.vhd}: A module for inserting an entry into a word, used in the control unit to fix the WriteState and WriteType bug.
+        \item \emph{fifo.vhd}: A fifo buffer.
+        \item \emph{shifter.vhd}: A static shifter, used in the dynamic shifter.
+        \item \emph{shifter\_dynamic.vhd}: A dynamic shifter, used in the combiner.
+    \end{itemize}
+    \item hardware/ipcore\_dir
+    \begin{itemize}
+        \item \emph{sp605\_pcie.xise}: Project file for the Spartan-6 PCI Express endpoint core.
+        \item \emph{sp605\_pcie.xco}: Core generator file for the Spartan-6 PCI Express endpoint core.
+    \end{itemize}
+    \item hardware/sp605
+    \begin{itemize}
+        \item \emph{constraints.ucf}: Timing and placement constraints for the SP605.
+        \item \emph{constraints\_sim.ucf}: Timing constraints for simulation.
+        \item \emph{pcie\_wrapper.vhd}: A wrapper for the Spartan-6 PCI Express endpoint core to remove all unneeded signals from cluttering other parts of the design.
+    \end{itemize}
+    \item hardware
+    \begin{itemize}
+        \item \emph{carp2D.xise}: Project file for the 2D design.
+        \item \emph{carp2Dsim.xise}: Project file for simulation of the 2D design.
+        \item \emph{carp3D.xise}: Project file for the 3D design.
+        \item \emph{carp3Dsim.xise}: Project file for simulation of the 3D design.
+    \end{itemize}
+    \item software/common
+    \begin{itemize}
+        \item \emph{pci.h}: Header file for pci.c
+        \item \emph{pci.c}: A general interface to find and memory-map PCI device memory regions.
+        \item \emph{sp605.h}: Header file for sp605.c
+        \item \emph{sp605.c}: Provides an open/close/read/write interface towards the communication module.
+    \end{itemize}
 \end{itemize}
 
