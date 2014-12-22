@@ -1,21 +1,13 @@
-%Evolvable hardware is... \TODO
-%
 Research into evolvable hardware has long been performed at NTNU.
 In 2003, a cellular automata research platform was created with the use of an FPGA.
-It was based on a two-dimensional matrix of sblocks, with built-in support for development.
 
 In expectation of new hardware with a larger FPGA, the platform was updated and extended in 2014.
 It was optimized to provide a speedup of 4 for most operations by taking advantage of increased resources.
-%The addition of a DFT and extension of the sblock matric into three dimensions were also promising new features.
-However, since the hardware did not arrive in time, the new PCI Express interface was not implemented.
-This also meant that new design could only be verified in simulation.
+However, the new PCI Express interface was not implemented and the design was only verified in simulation.
 
 The goal of this project was to finalize the platform, such that the new features and improved speed could be taken advantage of.
 The first objective towards that end was to replace the old communication interface.
 The second was to verify that the new design worked correctly when implemented in hardware.
-
-%Since the desired hardware was still unavailable at the start of this project, similar hardware with a smaller FPGA was procured instead.
-%Although the maximum size of the sblock matrix was greatly reduced, it would allow for implementation of the new communication interface and verification of the design.
 
 This paper details the implementation of the new communication interface, both in hardware and software.
 Then, the previously upgraded design is implemented and tested in the new hardware.
@@ -23,6 +15,4 @@ Then, the previously upgraded design is implemented and tested in the new hardwa
 Implementation of the new communication interface is a success.
 However, testing shows that there are a lot of issues with the upgraded design.
 Some issues were possible to fix within the alotted time, but several critical remain.
-
-%\todo{shorten this some?}
 
