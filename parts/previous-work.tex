@@ -1,4 +1,4 @@
-The Cellular Automata Research Platform has been the subject of three previous master theses at NTNU.
+The Cellular Automata Research Platform (CARP) has been the subject of three previous master theses at NTNU.
 The original implementation was made by Djupdal in 2003.
 It was then extended with a range of various output methods by Aamodt in 2005.
 Finally, it was further extended and optimized in expectation of new hardware by Støvneng in 2014.
@@ -33,17 +33,17 @@ Optionally, the BRAMs can be logically swapped and further development steps per
 The SBM can then be configured by translating the types in BRAM B into LUT entries according to the LUT conversion rules, before being run for a desired amount of cycles.
 Afterwards, the new states in the SBM can be read back into BRAM B, swapped into BRAM A, and sent to the computer.
 
-The design is split into two clock domains; the communication unit uses 40 MHz to be able to interface with PCI, while the rest uses 80 MHz for increased performance.
+The design is split into two clock domains; the communication unit uses 40 MHz to be able to interface with PCI, while the rest uses 80 MHz for higher performance.
 
 \subsection{Extension}
 
 There was one major bottleneck in the original design.
-To calculate the fitness of an individual, the state of each cell had to be transfered to the computer over the PCI interface.
+To calculate the fitness of an individual, the state of each cell had to be transferred to the computer over the PCI interface.
 Having a dedicated hardware unit would greatly improve the performance.
 Additionaly, it was desired to have more information about the development process.
 The task of realizing this fell to Aamodt \cite{aamodt2005sblock}.
 
-An overview of the hardware platform with Aamodt additions is shown in \figurename~\ref{fig:overview-aamodt}.
+An overview of the hardware platform with Aamodt's additions is shown in \figurename~\ref{fig:overview-aamodt}.
 The additions consists of a run-step function that calculates the number of live cells, BRAM to store the numbers, a fitness function, and two information outputs from the development unit.
 
 \begin{figure}[!ht]
@@ -54,18 +54,18 @@ The additions consists of a run-step function that calculates the number of live
 \end{figure}
 
 The rule vector BRAM stores lists of which rules were triggered and not for the last 256 development steps.
-The lists are called rule vectors since they are implemented as bit-vectors where each bit represents the status of a rule for a single development step.
+The lists are implemented as bit-vectors where each bit represents the status of a rule for a single development step.
 The development step BRAM is more detailed; it stores which rule was triggered for each cell.
 However, it only has storage space for one development step.
 
-The run-step function calculates the number of live cells after each run step by using a large adder network.
+The run-step function calculates the number of live cells after each SBM update by using a large adder tree.
 The numbers are stored in run-step BRAM for later usage by the fitness function, which is replacable.
 
 \subsection{Renovation}
 
-In expectation of receiving new hardware with a larger and faster FPGA, there was a demand to optimize the platform by take advantage of the increased resource pool.
+In expectation of receiving new hardware with a larger and faster FPGA, there was a demand to optimize the platform by taking advantage of the increased resource pool.
 Extending the platform into the third dimension was also a lucrative thought, as doing so allows more complex signal pathways to form within the cellular automata.
-It was also desired to have a discrete fourier transform for interpretation of the RSF data; it should give very useful data according to Berg's research \cite{berg2013ca}.
+It was also desired to have a discrete fourier transform (DFT) for interpretation of the RSF data; it should give very useful data according to Berg's research \cite{berg2013ca}.
 The task of realizing this was taken on by Støvneng \cite{stovneng2014sblock}.
 
 An overview of the hardware platform with Støvnengs additions and optimizations is shown in \figurename~\ref{fig:overview-stovneng}.

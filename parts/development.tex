@@ -1,4 +1,4 @@
-At the beginning of this project, several months after the end of Støvnengs project, there were still no signs of the new hardware.
+Multiple weeks into this project, several months after the end of Støvnengs project, there were still no signs of the new hardware.
 To prevent the project from halting dead in its tracks, a decision was taken to order slightly different hardware.
 The significant difference to the original system is reduced size of the FPGA, a Spartan-6 LX45T instead of a Spartan-6 LX150T, which entails around 70\% less available resources.
 Luckily, the hardware design can be scaled down to fit the smaller chip by reducing the size of the sblock matrix, allowing for implementation of PCI Express and verification of the complete system in hardware.
@@ -25,7 +25,7 @@ The switch and jumper configurations of the SP605 are set to factory defaults, w
 
 Due to the experimental nature of testing a new hardware platform, two computers were used in this project, as shown in \figurename~\ref{fig:hardware-setup}.
 One is the main development workstation, used for coding and synthesis; it has a JTAG connection to the SP605 over USB, which allows it to upload new designs.
-The other is the host for the SP605; it is mounted in a PCI Express expansion slot.
+The other is the host for the SP605, which is mounted in a PCI Express expansion slot.
 
 \begin{figure}[!ht]
     \centering
@@ -34,13 +34,13 @@ The other is the host for the SP605; it is mounted in a PCI Express expansion sl
     \label{fig:hardware-setup}
 \end{figure}
 
-The setup allows a new design to be uploaded and tested on the SP605 without the need to reboot the main workstation, due to the power-cycle required to reset the PCI Express connection.
+The setup allows a new design to be uploaded and tested on the SP605 without disrupting the workflow of the main workstation, due to the power-cycle required to reset the PCI Express connection.
 
 \subsection{Software setup}
 
 The operating system on both computers is Linux Mint; version 16 on the development computer and 17 on the test computer.
 Linux Mint is currently one of the most popular linux distributions, along with Ubuntu, which it is based upon \cite{distrowatch}.
-This means that procedures in this paper should be applicable to most systems.
+This means that procedures and software used and created in this paper should work on most systems.
 
 Xilinx ISE version 13.3 was used for hardware design and synthesis, while ISim was used for simulations.
 The third-party USB cable driver from \cite{usbdriver} was used for JTAG, as explained in Section~\ref{sec:challenges}.

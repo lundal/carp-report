@@ -14,18 +14,16 @@ The genotype is comparable to nature's DNA, and it is this genetic material whic
 \end{figure}
 
 The GA process is shown in \figurename~\ref{fig:ga}.
-First, a base population with random genotypes is constructed.
+First, a base population with random genotypes is generated.
 Then, each phenotype is constructed and evaluated using a fitness function.
 If a solution has a fitness score above a set threshold, the process stops.
-Otherwise, a new population is created by selecting solutions with high fitness scores, crossing their genotypes, and mutating the results.
-Then the process repeats.
+Otherwise, a new population is created by selecting solutions with high fitness scores, crossing their genotypes, and mutating the results, before repeating the process.
 
 \subsection{Development}
 
-The process that transforms the genotype into a phenotype is called development.
-It can be regarded as a form of decompression algorithm \cite{harding2008artificial}.
+The process that transforms the genotype into a phenotype is called development; it can be regarded as a form of decompression algorithm \cite{harding2008artificial}.
 In nature, this process is seen when a fertilized egg transforms into a multicellular organism.
-An example is shown in \figurename~\ref{fig:development}.
+A conseptual example is shown in \figurename~\ref{fig:development}.
 
 \begin{figure}[!ht]
     \centering
@@ -38,11 +36,9 @@ Development also allows individuals to adapt to their environments, making them 
 
 \subsection{Cellular automata}
 
-\todo{resembles biological stuff}
-
 A cellular automaton (CA) is a structure made up of vast numbers of very simple computational units called cells.
 The cells are arranged in a grid, with communication only permitted between nearby cells according to a neighborhood.
-The von Neumann neighborhood is common for two-dimensional CAs \CN;
+The von Neumann neighborhood is common for two-dimensional CAs;
 It includes the cells to the north, south, east and west, along with itself (center).
 An example of this is shown in \figurename~\ref{fig:ca}.
 
@@ -63,7 +59,7 @@ The update function is often specified as a look-up-table (LUT), where the next 
 If all cells implement the same update function then the CA is uniform, otherwise it is non-uniform.
 
 The update functions determine how complex patterns and structures emerge within the CA.
-Its behavior can be categorized into one of four classes \cite{wolfram1984complexity}.
+The emergent behavior can be categorized into one of four classes \cite{wolfram1984complexity}.
 
 \begin{enumerate}
     \item Homogeneous state.
@@ -77,19 +73,12 @@ It exists in the phase change between class 2 and 3, known as the edge of chaos 
 
 CAs have been shown to be Turing complete \cite{neumann1966selfreplication} \cite{codd1968cellular}, which means they are able to perform any kind of computation.
 
-%\todo{expand}
-%Self-Replication:
-%von Neumann's work on self-replication from around 1950 \cite{neumann1966selfreplication}.
-%Self-replicating structures \cite{reggia1998neumann}.
-%Replicating universal computers with 63 states and 8500 rules \cite{perrier1996toward}.
-%\todo{/expand}
-
 \subsection{Field Programmable Gate Array}
 
 A Field Programmable Gate Array (FPGA) is a type of reconfigurable hardware.
 It can implement any desired logical operation by configuring and connecting a number of look-up tables (LUTs) and flip-flops (FFs).
-FPGAs can also contain dedicated blocks for adding, multiplying, random access memory (RAM) and other functions.
-Configurable elements are grouped into configurable logic blocks (CLBs), which through a network of interconnects can be connected to each other or input/output pins.
+FPGAs can also contain dedicated blocks for addition, multiplication, memory, and other functions.
+These elements are grouped into configurable logic blocks (CLBs), which through a network of interconnects can be connected to each other or input/output pins.
 An example of this structure is shown in \figurename~\ref{fig:fpga}.
 Note that modern FPGAs consists of thousands of CLBs and hundreds of I/O pins \cite{ds160}.
 
@@ -109,8 +98,8 @@ This means that the bitstring can not be used directly as the genotype without c
 \subsection{Sblock}
 
 The sblock was introduced as part of a new EHW-friendly FPGA architecture in \cite{haddow2000sblock}.
-The architecture is a non-uniform CA with a von Neumann neighborhood, where the update function of each cell is independantly configurable at run-time.
-Each cell, called an sblock, is a very simple structure; it consists of a configurable look-up-table (LUT) and a flip-flop (FF), as shown in \figurename~\ref{fig:sblock}.
+The architecture is a non-uniform CA with a von Neumann neighborhood, where the update function of each cell is independently configurable at run-time.
+The cells, known as sblocks, are very simple structures; they consist of a configurable look-up-table (LUT) and a flip-flop (FF), as shown in \figurename~\ref{fig:sblock}.
 
 \begin{figure}[!ht]
     \centering
@@ -120,14 +109,14 @@ Each cell, called an sblock, is a very simple structure; it consists of a config
 \end{figure}
 
 The greatest benefit of using sblocks for EHW research is that there is no risk of damage or exploitation of intrinsic properties in the silicon.
-Additionaly, the simple structure and hardwired signal routing allows for more efficient area usage than a traditional FPGA.
+Additionaly, the simple structure and hardwired signal routing allows for very efficient area usage.
 The likelihood of a mass-produced sblock-FPGA arriving on the market in the near future is slim.
-However, it is possible to implement it virtually within another FPGA.
+However, it is possible to implement it virtually within an other FPGA.
 
 \subsection{PCI Express}
 
 The PCI Express interface was designed to tackle the arising trouble with clocked parallel buses like PCI.
-The problem with such buses is that the clock speed can not be increased beyond a given threshold, as the slightly different lengths of the many wires causes data to arrive at slightly different times.
+The problem with such buses is that the clock speed can not be increased beyond a given threshold, as the slightly different lengths of the wires causes data to arrive at slightly different times.
 Reducing the clock period to less than the variation in arrival time means the data will become corrupted.
 This problem is exacerbated with increasing bus size.
 
@@ -146,7 +135,7 @@ PCI Express consists of three layers; the physical layer, the data link layer an
     \label{fig:pcie}
 \end{figure}
 
-The transaction layers primary responsibility is the creation and parsing of transaction layer packets (TLPs).
+The transaction layer's primary responsibility is the creation and parsing of transaction layer packets (TLPs).
 TLPs are used to trigger events or start various transactions, most commonly to initiate read and write requests\footnotemark.
 \footnotetext{
     Read and write requests are directed at one of up to six base address registers (BARs).

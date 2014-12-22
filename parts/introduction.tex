@@ -3,7 +3,7 @@ EAs simulate mechanisms found in biological life, such as selection, reproductio
 The goal is to optimize fitness, the ability to survive in the competition for being the best solution.
 EAs can quickly find approximate solutions to hard problems, and then gradually refine them into good solutions.
 
-An interesting feature is that EAs can find ways to exploit hardware in ways that human designers cannot comprehend \cite{miller2014evolution}.
+An interesting feature is that EAs can find ways to exploit hardware in ways that human designers cannot comprehend \cite{thompson1997evolved}.
 This is often due to complex parallel interactions created, or usage of physical phenomena that is not fully understood.
 
 Technologies related to EHW, including a common EA and hardware platforms are presented in Section~\ref{sec:background}.
@@ -14,7 +14,7 @@ The purpose was to create a platform for experimentation with evolution and deve
 
 The initial work was done by Djupdal, before being extended by Aamodt.
 The CA was implemented as a matrix of sblocks, reprogrammable CA cells designed specifically for usage with evolution.
-It is connected to a development unit which can perform growth and change on the sblocks \todo{fix sentence}.
+It is connected to a development unit which can simulate growth and change in the sblock matrix.
 The hardware platform is connected to and controlled by a computer over a PCI connection.
 
 A general use-case for the platform is to have the computer run a genetic algorithm, where the genotype represents the initial CA state and development rules.
@@ -27,9 +27,9 @@ However, since the hardware did not arrive in time, the new design was only test
 
 An in-depth explanation of the platform's features, functionality and iterations is presented in Section~\ref{sec:previous-work}.
 
-The task of this project is to finish the new platform by implementing a new PCI Express communication unit, and verifying everything in hardware.
+The task of this project is to finish the new platform by implementing a new PCI Express communication unit, and to verify that everything is functional in hardware.
 This will allow the new platform, which is both faster and more feature-rich, to be taken into use.
-Other motives are detailed in Section~\ref{sec:motivation}.
+The motives are further detailed in Section~\ref{sec:motivation}.
 
 The implementation of the new communication unit is detailed in Section~\ref{sec:communication}, while the verification process and results are detailed in Section~\ref{sec:verification}.
 

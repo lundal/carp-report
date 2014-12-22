@@ -28,7 +28,7 @@ When the api transformed a 3D rule struct into an instruction, the position of u
 
 \emph{PrintTypes used wrong offsets for decomposition.}
 When decomposing a row of types into individual types, an offset of 5 was used instead of 8.
-This entailed that the printed values were completely wrong.
+This entailed that the printed values appeared as garbage.
 
 \emph{ReadVector and PrintVector used 32-bit words.}
 The functions were not updated from using 32-bit to 64-bit words.
@@ -56,10 +56,11 @@ This issue is also only present on the board, making it hard to analyze.
 The root cause could be with any of the following instructions: devstep, writeRule and setNumberOfLastRule.
 
 \emph{Config does not properly write states in 3D.}
-Simulations show that the BRAM address fluctuates \TODO.
+Simulations show that the BRAM address fluctuates, causing the states to be overwritten by 0 in the following cycle.
 
 \emph{Runstep causes every state to become zero.}
-\TODO
+When a runstep is performed, all states in the SBM is reset to 0.
+\todo{present in sim?}
 
 \subsection{Current status}
 

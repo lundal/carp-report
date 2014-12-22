@@ -1,11 +1,7 @@
 
-Due to the difference in wordsize between the old and new communication unit, a compatibility layer is added to allow other existing code to remain unchanged.
-
 \figurename~\ref{fig:overview-lundal} shows the changes to the hardware platform.
 The old COM40 unit has been replaced by a new communication unit and a compatibility layer.
-The compatibility layer is needed because the old COM40 unit was based on 64-bit data while PCI Express uses 32-bit data.
-FIFO!
-\todo{rewrite this}
+On the software side, the api uses linux' built-in drivers for PCI Express.
 
 \begin{figure}[!ht]
     \centering
@@ -14,11 +10,7 @@ FIFO!
     \label{fig:overview-lundal}
 \end{figure}
 
-The communication unit has internal data buffers.
-
-On the software side, the api uses linux' built-in drivers for PCI Express.
-
-\subsection{Overview}
+\subsection{Detailed overview}
 
 The new communication unit is based on Xilinx' reference PCI Express programmed io design.
 It consists of the Xilinx PCI Express endpoint core, reception and transmission engines, data buffers, and a special request handler, as shown in \figurename~\ref{fig:details-communication}.
@@ -50,11 +42,8 @@ The endpoint core is configured with two memory regions, both 4 kB in size\footn
     The smallest memory region that can be memory-mapped is one page. The default page size in Linux is 4 kB.
 }
 The first memory region (BAR0) is used for normal communication, while the second (BAR1) is used for special requests.
-The separaton is mostly conseptual as both regions are treated like a singular stream.
+The separation is mostly conseptual as both regions are treated as one data stream.
 The difference is that the special request handler kicks in for read requests to BAR1.
-
-\todo{wrapper?}
-\todo{vendor/device id?}
 
 \subsection{Reception engine}
 
@@ -117,12 +106,12 @@ There are currently four special requests implemented, as shown in Table~\ref{ta
 \end{table}
 
 Note that each of the implemented special requests assumes a read request length of one DW.
-If the request has a greater length, the returned data is simply repeated that number of times.
+If the request has a greater length, the returned data is simply repeated to fill the packet.
 
 \subsection{Buffers}
 
 The buffers are implemented as first-in first-out (FIFO) queues using block RAM (BRAM) and two counters.
-The counters deterimine the addresses that are written to and read from, and are incremented when the write or read signals are asserted.
+The counters determine the addresses that are written to and read from, and are incremented when the write or read signals are asserted.
 \figurename~\ref{fig:wavediagram-fifo} shows how the FIFO is used to buffer two words.
 
 \begin{figure}[!ht]
@@ -135,6 +124,16 @@ The counters deterimine the addresses that are written to and read from, and are
 Notice how the read signal needs to be asserted before the clock tick when data is read to ensure correct consecutive reads.
 This is due to the BRAM used in the FIFO, which updates at clock ticks.
 To have correct data available for a read in the following cycle, the address therefore has to be updated before the clock tick (by asserting the read signal).
+
+\subsection{Compatibility layer}
+
+\todo{rewrite this}
+
+Due to the difference in wordsize between the old and new communication unit, a compatibility layer is added to allow other existing code to remain unchanged.
+
+The compatibility layer is needed because the old COM40 unit was based on 64-bit data while PCI Express uses 32-bit data.
+
+
 
 \subsection{Software API}
 
