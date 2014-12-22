@@ -20,6 +20,22 @@ If a solution has a fitness score above a set threshold, the process stops.
 Otherwise, a new population is created by selecting solutions with high fitness scores, crossing their genotypes, and mutating the results.
 Then the process repeats.
 
+\subsection{Development}
+
+The process that transforms the genotype into a phenotype is called development.
+It can be regarded as a form of decompression algorithm \cite{harding2008artificial}.
+In nature, this process is seen when a fertilized egg transforms into a multicellular organism.
+An example is shown in \figurename~\ref{fig:development}.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=0.30\textwidth]{figures/development}
+    \caption{An example of one cell developing into six. Additionally, some cells change type.}
+    \label{fig:development}
+\end{figure}
+
+Development also allows individuals to adapt to their environments, making them more robust and scalable \cite{tufte2008evodevo}.
+
 \subsection{Cellular automata}
 
 \todo{resembles biological stuff}
