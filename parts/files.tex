@@ -1,4 +1,4 @@
-Directory structure:
+\emph{Directory structure:}
 
 \begin{itemize}
     \item hardware
@@ -22,7 +22,7 @@ Directory structure:
     \end{itemize}
 \end{itemize}
 
-List of new files:
+\emph{New files:}
 
 \begin{itemize}
     \item hardware/common/communication
@@ -65,6 +65,34 @@ List of new files:
         \item \emph{pci.c}: A general interface to find and memory-map PCI device memory regions.
         \item \emph{sp605.h}: Header file for sp605.c
         \item \emph{sp605.c}: Provides an open/close/read/write interface towards the communication module implemented on the SP605.
+    \end{itemize}
+\end{itemize}
+
+\emph{Modified files:}
+
+\begin{itemize}
+    \item hardware/2D
+    \begin{itemize}
+        \item \emph{lss.vhd}: The LoadSendStore unit; a part of the control unit.
+    \end{itemize}
+    \item hardware/3D
+    \begin{itemize}
+        \item \emph{dev.vhd}: The development unit.
+        \item \emph{lss.vhd}: The LoadSendStore unit; a part of the control unit.
+    \end{itemize}
+    \item software/2D
+    \begin{itemize}
+        \item \emph{read\_print.c}: Convenience functions for printing states and types.
+        \item \emph{sblocktest.c}: Tests.
+        \item \emph{sblocklib.h}: Header file for sblocklib.h
+        \item \emph{sblocklib.c}: The main API.
+    \end{itemize}
+    \item software/3D
+    \begin{itemize}
+        \item \emph{read\_print.c}: Convenience functions for printing states and types.
+        \item \emph{sblocktest.c}: Tests.
+        \item \emph{sblocklib.h}: Header file for sblocklib.h
+        \item \emph{sblocklib.c}: The main API.
     \end{itemize}
 \end{itemize}
 

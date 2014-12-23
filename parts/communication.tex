@@ -1,7 +1,7 @@
 
 \figurename~\ref{fig:overview-lundal} shows the changes to the hardware platform.
 The old COM40 unit has been replaced by a new communication unit and a compatibility layer.
-On the software side, the api uses linux' built-in drivers for PCI Express.
+It communicates with a new software api which uses Linux' built-in drivers for PCI Express.
 
 \begin{figure}[!ht]
     \centering
@@ -12,7 +12,7 @@ On the software side, the api uses linux' built-in drivers for PCI Express.
 
 \subsection{Detailed overview}
 
-The new communication unit is based on Xilinx' reference PCI Express programmed io design.
+The new communication unit is based on Xilinx' reference PCI Express programmed input/output design.
 It consists of the Xilinx PCI Express endpoint core, reception and transmission engines, data buffers, and a special request handler, as shown in \figurename~\ref{fig:details-communication}.
 
 \begin{figure}[!ht]
@@ -127,13 +127,12 @@ To have correct data available for a read in the following cycle, the address th
 
 \subsection{Compatibility layer}
 
-\todo{rewrite this}
+Due to the difference in wordsize between the new and old communication units (32 vs 64 bits), a compatibility layer is added between the communicaton unit and the control unit.
+This allows the control unit and the rest of the design to remain unchanged, making the replacement transparent.
 
-Due to the difference in wordsize between the old and new communication unit, a compatibility layer is added to allow other existing code to remain unchanged.
-
-The compatibility layer is needed because the old COM40 unit was based on 64-bit data while PCI Express uses 32-bit data.
-
-
+The compatibility layer contains two very simple state machines.
+One combines two 32-bit words from the communication unit into 64-bit words for the control unit.
+The other splits 64-bit words from the control unit into two 32-bit words for the communication unit.
 
 \subsection{Software API}
 

@@ -1,75 +1,29 @@
-\todo{Støvneng verified everything in simulation. But as we all know, simulation and implementation can differ.}
+Due to lack of hardware, Støvneng only verified his changes in simulation.
+With available hardware and an updated communication unit, the design can finally be properly verified.
 
-\todo{something about testing the com unit}
-
-\todo{8x8, 8x8x8 matrices}
-
-\todo{something about testbench}
-
-Testing uncovered many issues within the design
-
-\subsection{Communication}
+\subsection{Methodology}
 
 The communication unit was tested in hardware by connecting the output of the reception buffer to the input of the transmission buffer.
-Then, sample data was sent over PCI Express to the SP605, before being then read back.
+Then sample data was sent over PCI Express to the SP605 and then read back.
 
-\subsection{Solved issues}
+The updated hardware design was tested with SBM sizes of 8x8 for 2D and 8x8x8 for 3D.
+The tests are detailed in Appendix \ref{sec:tests}; each one has a short description and a list of the instructions it verifies.
+Together, the 11 tests cover all instructions.
 
-\emph{States and types were written to the wrong location.}
-When writing single states or types, a half-row is read from BRAM, combined with the new data, and written back to BRAM.
-Due to the usage of non-implementable code to specify how the data should be combined, the new data always ended up in the middle of the half-row.
+Note that due to some instructions being dependent on others, it is not always possible to know which instruction is failing.
 
-\emph{Development ran indefinitely.}
-Comparison of signals of different widths always return false.
-Due to the comparison of a parameterized signal with a constant, the development unit would not iterate through the cells, and thus never finish.
+\subsection{Results}
 
-\emph{WriteRule did not follow spesification.}
-When the api transformed a 3D rule struct into an instruction, the position of up/down and north/south were swapped.
+The communication unit returns the correct data in the correct order, which means it passes its test.
 
-\emph{PrintTypes used wrong offsets for decomposition.}
-When decomposing a row of types into individual types, an offset of 5 was used instead of 8.
-This entailed that the printed values appeared as garbage.
+The 2D design passes all tests except for 6 and 8, while the 3D design failes test 1, 3, 6, 7 and 8.
+This means that the two most crucial components, the SBM and development unit, is working in neither.
+The 3D design also has some additional issues.
 
-\emph{ReadVector and PrintVector used 32-bit words.}
-The functions were not updated from using 32-bit to 64-bit words.
-ReadVector would therefore expect twice the number of words provided by the hardware platform, causing the program to wait for nonexistant data.
+The status of each instruction is listed in Table~\ref{tab:instructions}, while descriptions of the issues are listed in Section~\ref{sec:remaining-issues}.
 
-\subsection{Remaining issues}
-
-\emph{ReadStates prints garbage in top 32 bits.}
-This occurs due to a buffering error in the LSS unit.
-However, only the least 32 bits are used by the api, which means that this issue only impacts performance and not functionality.
-
-\emph{WriteStates and WriteTypes does nothing in 3D.}
-This issue is only present on the board, not in any simulations, which makes it hard to track down the cause.
-
-\emph{ReadRuleVector sends incorrect data.}
-The first execution of the instruction produces an extra word; a repetition of the first.
-Following executions produces the correct amount of words, but the order is offset by one.
-
-\emph{ReadUsedRules fails for SBM widths less than 16.}
-The simulator crashes with an index-out-of-bounds error, due to the instruction treating a $[width\cdot4]$ bits wide signal as if it is 64 bits wide.
-How ISE is able to implement the design despite illegal indexing is a mystery, but the instruction produces only zeroes when executed on the board.
-
-\emph{Development rules does not activate.}
-This issue is also only present on the board, making it hard to analyze.
-The root cause could be with any of the following instructions: devstep, writeRule and setNumberOfLastRule.
-
-\emph{Config does not properly write states in 3D.}
-Simulations show that the BRAM address fluctuates, causing the states to be overwritten by 0 in the following cycle.
-
-\emph{Runstep causes every state to become zero.}
-When a runstep is performed, all states in the SBM is reset to 0.
-\todo{present in sim?}
-
-\subsection{Current status}
-
-\TODO
-
-\begin{itemize}
-    \item PCIe com unit works beautifully
-    \item Large parts are non-functional
-\end{itemize}
+Some issues were solved in the alotted time.
+They are not included in these results, but are listed in Section~\ref{sec:solved-issues} for completeness.
 
 \begin{table}[!ht]
     \renewcommand{\arraystretch}{1.3}
@@ -111,4 +65,55 @@ When a runstep is performed, all states in the SBM is reset to 0.
         writeTypes & Yes & No \\
     \end{tabular}
 \end{table}
+
+\subsection{Remaining issues}
+\label{sec:remaining-issues}
+
+\emph{ReadStates prints garbage in top 32 bits.}
+This occurs due to a buffering error in the LSS unit.
+However, only the least 32 bits are used by the api, which means that this issue only impacts performance and not functionality.
+
+\emph{WriteStates and WriteTypes does nothing in 3D.}
+This issue is only present on the board, not in any simulations, which makes it hard to track down the cause.
+
+\emph{ReadRuleVector sends incorrect data.}
+The first execution of the instruction produces an extra word; a repetition of the first.
+Following executions produces the correct amount of words, but the order is offset by one.
+
+\emph{ReadUsedRules fails for SBM widths less than 16.}
+The simulator crashes with an index-out-of-bounds error, due to the instruction treating a $[width\cdot4]$ bits wide signal as if it is 64 bits wide.
+How ISE is able to implement the design despite illegal indexing is a mystery, but the instruction produces only zeroes when executed on the board.
+
+\emph{Development rules does not activate.}
+This issue is also only present on the board, making it hard to analyze.
+The root cause could be with any of the following instructions: devstep, writeRule and setNumberOfLastRule.
+
+\emph{Config does not properly write states in 3D.}
+Simulations show that the BRAM address fluctuates, causing the states to be overwritten by 0 in the following cycle.
+
+\emph{Runstep causes every state to become zero.}
+When a runstep is performed, all states in the SBM is reset to 0.
+\todo{present in sim?}
+
+\subsection{Solved issues}
+\label{sec:solved-issues}
+
+\emph{States and types were written to the wrong location.}
+When writing single states or types, a half-row is read from BRAM, combined with the new data, and written back to BRAM.
+Due to the usage of non-implementable code to specify how the data should be combined, the new data always ended up in the middle of the half-row.
+
+\emph{Development ran indefinitely.}
+Comparison of signals of different widths always return false.
+Due to the comparison of a parameterized signal with a constant, the development unit would not iterate through the cells, and thus never finish.
+
+\emph{WriteRule did not follow spesification.}
+When the api transformed a 3D rule struct into an instruction, the position of up/down and north/south were swapped.
+
+\emph{PrintTypes used wrong offsets for decomposition.}
+When decomposing a row of types into individual types, an offset of 5 was used instead of 8.
+This entailed that the printed values appeared as garbage.
+
+\emph{ReadVector and PrintVector used 32-bit words.}
+The functions were not updated from using 32-bit to 64-bit words.
+ReadVector would therefore expect twice the number of words provided by the hardware platform, causing the program to wait for nonexistant data.
 
